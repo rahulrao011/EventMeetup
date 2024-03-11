@@ -1,1 +1,3 @@
-Public URL: https://eventmeetupfrontend.onrender.com/
+Public URLs:
+backend: https://kickbackkrazebackend.onrender.com
+frontend: https://kickbackkraze.onrender.com
