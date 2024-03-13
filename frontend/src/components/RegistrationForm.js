@@ -15,7 +15,7 @@ function RegistrationForm() {
     const userData = { name, email };
 
     // determine which URL to use
-    const url = REACT_APP_BACKEND_URL + "/register/";
+    let url = REACT_APP_BACKEND_URL + "/register/";
     if (REACT_APP_IS_IN_DEVELOPMENT == "1") {
       url = REACT_APP_BACKEND_URL + ":8080" + "/register/";
     }
@@ -38,6 +38,7 @@ function RegistrationForm() {
     if (response.ok) {
       setError(null);
       console.log('user registered!', responseJson);
+      alert('Successfully registered!');
     }
   };
 
