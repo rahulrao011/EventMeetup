@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 const REACT_APP_BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const REACT_APP_BACKEND_PORT = process.env.REACT_APP_BACKEND_PORT;
+const REACT_APP_IS_IN_DEVELOPMENT = process.env.REACT_APP_IS_IN_DEVELOPMENT;
 
 function RegistrationForm() {
   const [name, setName] = useState("");
@@ -14,8 +14,14 @@ function RegistrationForm() {
     e.preventDefault(); // prevents the page from reloading, which is the default behavior of submitting a form
     const userData = { name, email };
 
+    // determine which URL to use
+    const url = REACT_APP_BACKEND_URL + "/register/";
+    if (REACT_APP_IS_IN_DEVELOPMENT == "1") {
+      url = REACT_APP_BACKEND_URL + ":8080" + "/register/";
+    }
+
     // send POST request to backend with user data
-    const response = await fetch(REACT_APP_BACKEND_URL + ":" + REACT_APP_BACKEND_PORT + "/register/", {
+    const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify(userData),
       headers: {
@@ -23,6 +29,7 @@ function RegistrationForm() {
       },
       mode: 'cors'
     });
+
     const responseJson = await response.json();
 
     if (!response.ok) {
